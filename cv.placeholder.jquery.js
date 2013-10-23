@@ -8,17 +8,18 @@
 		self.$el = $(element);
 
 		//
-		// Options
+		// options
 		options = (options || {});
 		self.options = $.extend({}, self.defaults, options);
 
 		//
-		// Assign placeholder mask url to a sane default
+		// assign placeholder mask url to a sane default
 		self.options.maskImageUrl = (options.maskImageUrl)
 			? options.maskImageUrl
 			: (options.placeholderImageUrl || self.defaults.placeholderImageUrl);
 
-		// Constructor
+		// 
+		// constructor
 		self.init.apply(self, arguments);
 	};
 
@@ -35,6 +36,7 @@
 				'width':            this.$el.width(),
 				'height':           this.$el.height(),
 				'display':          'block',
+				'background-size':  this.$el.width() + 'px ' + this.$el.height() + 'px',
 				'background-image': 'url(' + this.options.placeholderImageUrl + ')'
 			});
 		},
@@ -60,25 +62,25 @@
 		init: function(){
 
 			//
-			// Register event handlers
+			// register event handlers
 			this.onError();
 			this.onSuccess();
 
 			//
-			// Apply placeholder styles
+			// apply placeholder styles
 			this.style();
 
 			//
-			// Add placeholder mask if enabled
+			// add placeholder mask if enabled
 			if(this.options.showMask){
-				var mask = new PlaceholderMask(this.$el, this.options)
+				var mask = new PlaceholderMask(this.$el, this.options);
 			}
 		}
 	};
 
 	var PlaceholderMask = function(element, options){
+	
 		var self = (this instanceof PlaceholderMask) ? this : Object.create(PlaceholderMask.prototype);
-
 		self.$el = $(element);
 
 		self.options = $.extend({}, self.defaults, options);
@@ -87,6 +89,7 @@
 	};
 
 	PlaceholderMask.prototype = {
+	
 		defaults: {},
 
 		style: function(){
@@ -100,6 +103,7 @@
 					'z-index':          9998,
 					'display':          'block',
 					'position':         'absolute',
+					'background-size':  this.$el.width() + 'px ' + this.$el.height() + 'px',
 					'background-image': 'url(' + this.options.maskImageUrl + ')'
 				});
 		},
@@ -118,7 +122,7 @@
 			// Apply styles to mask
 			this.style();
 		}
-		};
+	};
 
 	$.fn.cvPlaceholder = function( option ){
 		return this.each(function () {
