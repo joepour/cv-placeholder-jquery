@@ -21,6 +21,8 @@
 		// 
 		// constructor
 		self.init.apply(self, arguments);
+		
+		return self;
 	};
 
 	Placeholder.prototype = {
@@ -86,6 +88,8 @@
 		self.options = $.extend({}, self.defaults, options);
 
 		self.init.apply(self, arguments);
+		
+		return self;
 	};
 
 	PlaceholderMask.prototype = {
